@@ -8,18 +8,12 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-node_modules/**
-dist
-dist-ssr
+**/node_modules/**
+backend/dist
+frontend/dist
 *.local
 
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
-.idea
 .DS_Store
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-*.sw?

@@ -1,1 +1,1 @@
-web: pnpm run build & pnpm run start
+web: npm install -g corepack & corepack use pnpm@9 & pnpm run build & pnpm run start

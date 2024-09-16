@@ -2,11 +2,11 @@
 	"private": true,
 	"scripts": {
 		"dev": "run-p dev:*",
-		"dev:frontend": "cd frontend && pnpm run dev",
-		"dev:backend": "cd backend && pnpm run dev",
+		"dev:frontend": "pnpm -F \"frontend\" dev",
+		"dev:backend": "pnpm -F \"backend\" dev",
 		"build": "run-p build:*",
-		"build:frontend": "cd frontend && pnpm run build",
-		"build:backend": "cd backend && pnpm run build"
+		"build:frontend": "pnpm -F \"frontend\" build",
+		"build:backend": "pnpm -F \"backend\" build"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.1",

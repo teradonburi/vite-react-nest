@@ -6,7 +6,8 @@
 		"dev:backend": "pnpm -F \"backend\" dev",
 		"build": "run-p build:*",
 		"build:frontend": "pnpm -F \"frontend\" build",
-		"build:backend": "pnpm -F \"backend\" build"
+		"build:backend": "pnpm -F \"backend\" build",
+		"start": "pnpm -F \"backend\" start"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.1",

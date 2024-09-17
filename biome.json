@@ -20,8 +20,12 @@
 		"enabled": true,
 		"rules": {
 			"recommended": true,
+			"suspicious": {
+				"noConfusingVoidType": "off"
+			},
 			"style": {
-				"useImportType": "off"
+				"useImportType": "off",
+				"noUnusedTemplateLiteral": "off"
 			}
 		}
 	},

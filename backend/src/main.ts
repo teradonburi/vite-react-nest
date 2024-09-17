@@ -10,17 +10,26 @@ async function bootstrap() {
 	const adapterHost = app.get(HttpAdapterHost);
 	app.useGlobalFilters(new AllExceptionsFilter(adapterHost));
 
-	const config = new DocumentBuilder()
-		.setTitle("api example")
-		.setDescription("The API description")
-		.setVersion("1.0")
-		.addTag("example")
-		.build();
-	const document = SwaggerModule.createDocument(app, config);
-	SwaggerModule.setup("api-docs", app, document);
+	if (process.env.NODE_ENV !== "production") {
+		// CORS
+		app.enableCors({
+			origin: "*",
+			allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
+		});
 
-	// JSON
-	fs.writeFileSync("./swagger.json", JSON.stringify(document, null, 2));
+		// Swagger
+		const config = new DocumentBuilder()
+			.setTitle("api example")
+			.setDescription("The API description")
+			.setVersion("1.0")
+			.addTag("example")
+			.build();
+		const document = SwaggerModule.createDocument(app, config);
+		SwaggerModule.setup("api-docs", app, document);
+
+		// export to JSON
+		fs.writeFileSync("./swagger.json", JSON.stringify(document, null, 2));
+	}
 
 	await app.listen(process.env.PORT || 3000);
 }

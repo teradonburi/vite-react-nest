@@ -4,6 +4,41 @@
     "/api": {
       "get": {
         "operationId": "AppController_getHello",
+        "summary": "あいさつ取得",
+        "description": "あいさつを取得する。",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ApiCommonResponseOfGetHelloResponse",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CommonResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/GetHelloResponse"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/error": {
+      "get": {
+        "operationId": "AppController_getError",
+        "summary": "(強制エラー)",
+        "description": "強制的にエラーを出力する。",
         "parameters": [],
         "responses": {
           "200": {
@@ -27,6 +62,51 @@
   ],
   "servers": [],
   "components": {
-    "schemas": {}
+    "schemas": {
+      "CommonResponseDto": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "description": "実行結果",
+            "example": true
+          },
+          "date": {
+            "format": "date-time",
+            "type": "string",
+            "description": "レスポンス送信日時",
+            "example": "2024-03-12T07:45:29.583Z"
+          },
+          "data": {
+            "type": "object",
+            "description": "データ"
+          },
+          "error": {
+            "type": "string",
+            "description": "エラー内容",
+            "example": []
+          }
+        },
+        "required": [
+          "success",
+          "date",
+          "data",
+          "error"
+        ]
+      },
+      "GetHelloResponse": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "実行結果",
+            "example": true
+          }
+        },
+        "required": [
+          "message"
+        ]
+      }
+    }
   }
 }

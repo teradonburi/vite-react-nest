@@ -1,11 +1,14 @@
 import * as fs from "node:fs";
-import { NestFactory } from "@nestjs/core";
+import { HttpAdapterHost, NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { AllExceptionsFilter } from "./all-exception.filter";
 import { AppModule } from "./app.module";
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
 	app.setGlobalPrefix("api");
+	const adapterHost = app.get(HttpAdapterHost);
+	app.useGlobalFilters(new AllExceptionsFilter(adapterHost));
 
 	const config = new DocumentBuilder()
 		.setTitle("api example")

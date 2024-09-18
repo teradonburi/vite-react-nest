@@ -3,6 +3,7 @@ import { HttpAdapterHost, NestFactory } from "@nestjs/core";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 import { AllExceptionsFilter } from "./all-exception.filter";
 import { AppModule } from "./app/app.module";
+import { ValidationPipe } from "@nestjs/common";
 
 async function bootstrap() {
 	const app = await NestFactory.create(AppModule);
@@ -16,6 +17,8 @@ async function bootstrap() {
 			origin: "*",
 			allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
 		});
+		// remove unused request parameters
+		app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
 
 		// Swagger
 		const config = new DocumentBuilder()

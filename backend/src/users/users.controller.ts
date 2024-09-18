@@ -16,6 +16,7 @@ import { ApiOperation } from "@nestjs/swagger";
 import { ApiCommonOkResponse } from "../api-common-ok-response.decorator";
 import { CommonOkResponseInterceptor } from "../api-common-ok-response.interceptor";
 import { UserResponseDto } from "./dto/get-user.dto";
+import { plainToClass } from "class-transformer";
 
 @UseGuards(AuthGuard("jwt"))
 @Controller("users")
@@ -29,8 +30,11 @@ export class UsersController {
 	})
 	@ApiCommonOkResponse(UserResponseDto, "object")
 	@UseInterceptors(CommonOkResponseInterceptor)
-	findOne(@Param("id") id: string) {
-		return this.usersRespository.findById(+id);
+	async findOne(@Param("id") id: string) {
+		const user = await this.usersRespository.findById(+id);
+		return plainToClass(UserResponseDto, user, {
+			excludeExtraneousValues: true,
+		});
 	}
 
 	@Patch(":id")
@@ -40,17 +44,20 @@ export class UsersController {
 	})
 	@ApiCommonOkResponse(UserResponseDto, "object")
 	@UseInterceptors(CommonOkResponseInterceptor)
-	update(
+	async update(
 		@Param("id") id: string,
 		@Body(new ValidationPipe()) updateUserDto: UpdateUserDto,
 	) {
-		return this.usersRespository.update(+id, updateUserDto);
+		const user = await this.usersRespository.update(+id, updateUserDto);
+		return plainToClass(UserResponseDto, user, {
+			excludeExtraneousValues: true,
+		});
 	}
 
 	@Delete(":id")
 	@ApiCommonOkResponse(UserResponseDto, "object")
 	@UseInterceptors(CommonOkResponseInterceptor)
-	remove(@Param("id") id: string) {
-		return this.usersRespository.remove(+id);
+	async remove(@Param("id") id: string) {
+		return await this.usersRespository.remove(+id);
 	}
 }

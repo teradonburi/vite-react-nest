@@ -35,7 +35,7 @@ export type CommonResponseDto = {
   error: string;
 };
 export type GetHelloResponse = {
-  /** 実行結果 */
+  /** メッセージ */
   message: string;
 };
 export const { useAppControllerGetHelloQuery, useAppControllerGetErrorQuery } =

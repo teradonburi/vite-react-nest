@@ -8,6 +8,7 @@
 	"scripts": {
 		"build": "prisma generate & nest build",
 		"start": "node dist/src/main",
+		"openapi": "npx @rtk-query/codegen-openapi openapi-config.ts",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
 		"dev": "nest start --watch",
 		"debug": "nest start --debug --watch",

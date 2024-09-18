@@ -1,9 +1,9 @@
 import { Controller, Get } from "@nestjs/common";
 import { ApiOperation } from "@nestjs/swagger";
-import { ApiCommonOkResponse } from "./api-common-ok-response.decorator";
+import { ApiCommonOkResponse } from "../api-common-ok-response.decorator";
 import { AppService } from "./app.service";
 import { GetHelloResponse } from "./app.dto";
-import { CommonResponseDto } from "./common-response.dto";
+import { CommonResponseDto } from "../common-response.dto";
 
 @Controller()
 export class AppController {

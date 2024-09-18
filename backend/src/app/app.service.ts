@@ -1,6 +1,6 @@
 import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { GetHelloResponse } from "./app.dto";
-import { CommonResponseDto } from "./common-response.dto";
+import { CommonResponseDto } from "../common-response.dto";
 
 @Injectable()
 export class AppService {

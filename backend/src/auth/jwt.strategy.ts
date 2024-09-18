@@ -22,6 +22,7 @@ export class JwtStrategy extends PassportStrategy(BaseJwtStrategy) {
 		});
 	}
 
+	// jwtService.sign()の引数をvalidate()に渡す
 	async validate(payload: { sub: number; email: string }) {
 		return { userId: payload.sub, username: payload.email };
 	}

@@ -1,13 +1,39 @@
-import { useAppControllerGetHelloQuery } from "./store/api/gen/app.gen";
+import { Routes, Route } from "react-router-dom";
+import TopPage from "./pages/TopPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import SignupPage from "./pages/SignupPage";
+import LoginPage from "./pages/LoginPage";
+import Layout from "./templates/Layout";
 
 function App() {
-	const { isLoading, data: response } = useAppControllerGetHelloQuery();
-
 	return (
-		<>
-			<h1>React + NestJS</h1>
-			<div>{isLoading ? <div>Loading...</div> : response.data.message}</div>
-		</>
+		<Routes>
+			<Route
+				path="/"
+				element={
+					<Layout>
+						<TopPage />
+					</Layout>
+				}
+			/>
+			<Route
+				path="/signup"
+				element={
+					<Layout>
+						<SignupPage />
+					</Layout>
+				}
+			/>
+			<Route
+				path="/login"
+				element={
+					<Layout>
+						<LoginPage />
+					</Layout>
+				}
+			/>
+			<Route path="/*" element={<NotFoundPage />} />
+		</Routes>
 	);
 }
 

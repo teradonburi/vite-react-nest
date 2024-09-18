@@ -4,7 +4,6 @@ import {
 	fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import fetch from "isomorphic-fetch";
-// import { GlobalState } from 'main/modules/globalState'
 
 export const baseApi = createApi({
 	baseQuery: fetchBaseQuery({
@@ -12,13 +11,13 @@ export const baseApi = createApi({
 			process.env.NODE_ENV === "production"
 				? window.location.origin
 				: "http://localhost:3000",
-		prepareHeaders: (headers /*,{ getState }*/) => {
-			// const state = getState() as GlobalState
-			// const token: string | null = state?.auth?.user?.token
+		prepareHeaders: (headers, { getState }) => {
+			const state = getState() as { access_token: string };
+			const access_token: string = state?.access_token;
 
-			// if (token) {
-			//   headers.set('Authorization', `Bearer ${token}`)
-			// }
+			if (access_token) {
+				headers.set("Authorization", `Bearer ${access_token}`);
+			}
 
 			return headers;
 		},

@@ -15,7 +15,11 @@ const injectedRtkApi = api.injectEndpoints({
       AuthControllerLoginResponse,
       AuthControllerLoginArgs
     >({
-      query: () => ({ url: `/api/auth/login`, method: "POST" }),
+      query: (queryArg) => ({
+        url: `/api/auth/login`,
+        method: "POST",
+        body: queryArg.loginDto,
+      }),
     }),
   }),
   overrideExisting: false,
@@ -26,7 +30,9 @@ export type AuthControllerSignupArgs = {
   createUserDto: CreateUserDto;
 };
 export type AuthControllerLoginResponse = unknown;
-export type AuthControllerLoginArgs = void;
+export type AuthControllerLoginArgs = {
+  loginDto: LoginDto;
+};
 export type CreateUserDto = {
   /** Email */
   email: string;
@@ -34,6 +40,12 @@ export type CreateUserDto = {
   password: string;
   /** name */
   name: string;
+};
+export type LoginDto = {
+  /** Email */
+  email: string;
+  /** password */
+  password: string;
 };
 export const {
   useAuthControllerSignupMutation,

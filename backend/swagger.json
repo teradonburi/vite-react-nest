@@ -72,6 +72,16 @@
       "post": {
         "operationId": "AuthController_login",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": ""
@@ -292,6 +302,25 @@
           "email",
           "password",
           "name"
+        ]
+      },
+      "LoginDto": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Email",
+            "example": "test@example.com"
+          },
+          "password": {
+            "type": "string",
+            "description": "password",
+            "example": "password"
+          }
+        },
+        "required": [
+          "email",
+          "password"
         ]
       },
       "UserResponseDto": {

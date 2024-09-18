@@ -11,6 +11,12 @@ const config: ConfigFile = {
 		"../frontend/src/store/api/gen/app.gen.ts": {
 			filterEndpoints: [/appController/],
 		},
+		"../frontend/src/store/api/gen/auth.gen.ts": {
+			filterEndpoints: [/authController/],
+		},
+		"../frontend/src/store/api/gen/users.gen.ts": {
+			filterEndpoints: [/usersController/],
+		},
 	},
 };
 

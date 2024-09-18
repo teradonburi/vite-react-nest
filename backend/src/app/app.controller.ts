@@ -1,9 +1,9 @@
-import { Controller, Get } from "@nestjs/common";
+import { Controller, Get, UseInterceptors } from "@nestjs/common";
 import { ApiOperation } from "@nestjs/swagger";
 import { ApiCommonOkResponse } from "../api-common-ok-response.decorator";
 import { AppService } from "./app.service";
 import { GetHelloResponse } from "./app.dto";
-import { CommonResponseDto } from "../common-response.dto";
+import { CommonOkResponseInterceptor } from "../api-common-ok-response.interceptor";
 
 @Controller()
 export class AppController {
@@ -15,7 +15,8 @@ export class AppController {
 		description: "あいさつを取得する。",
 	})
 	@ApiCommonOkResponse(GetHelloResponse, "object")
-	getHello(): CommonResponseDto<GetHelloResponse> {
+	@UseInterceptors(CommonOkResponseInterceptor)
+	getHello(): GetHelloResponse {
 		return this.appService.getHello();
 	}
 

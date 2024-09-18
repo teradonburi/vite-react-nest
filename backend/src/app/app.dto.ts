@@ -3,8 +3,8 @@ import { IsNotEmpty, IsString } from "class-validator";
 
 export class GetHelloResponse {
 	@ApiProperty({
-		description: "実行結果",
-		example: true,
+		description: "メッセージ",
+		example: "Hello World!",
 	})
 	@IsString()
 	@IsNotEmpty()

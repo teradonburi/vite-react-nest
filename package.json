@@ -7,12 +7,15 @@
 		"build": "run-p build:*",
 		"build:frontend": "pnpm -F \"frontend\" build",
 		"build:backend": "pnpm -F \"backend\" build",
-		"start": "pnpm -F \"backend\" start"
+		"test": "pnpm -F \"backend\" test",
+		"husky": "pnpm -F \"backend\" start",
+		"prepare": "husky"
 	},
 	"devDependencies": {
-		"typescript": "5.1.3",
 		"@biomejs/biome": "^1.9.1",
-		"npm-run-all": "^4.1.5"
+		"husky": "^9.1.6",
+		"npm-run-all": "^4.1.5",
+		"typescript": "5.1.3"
 	},
 	"packageManager": "pnpm@9.10.0"
 }

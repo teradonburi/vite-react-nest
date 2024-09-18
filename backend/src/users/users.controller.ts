@@ -13,8 +13,8 @@ import { UsersService } from "./users.service";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { ApiOperation } from "@nestjs/swagger";
-import { ApiCommonOkResponse } from "src/api-common-ok-response.decorator";
-import { CommonOkResponseInterceptor } from "src/api-common-ok-response.interceptor";
+import { ApiCommonOkResponse } from "../api-common-ok-response.decorator";
+import { CommonOkResponseInterceptor } from "../api-common-ok-response.interceptor";
 import { UserResponseDto } from "./dto/get-user.dto";
 
 @UseGuards(AuthGuard("jwt"))

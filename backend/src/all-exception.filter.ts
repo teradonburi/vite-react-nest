@@ -31,6 +31,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
 			error = exception.toString();
 		}
 
+		// 共通エラーレスポンス
 		const responseBody: CommonResponseDto<null> = {
 			success: false,
 			date: new Date(),

@@ -6,11 +6,11 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {
-		"build": "prisma generate & prisma migrate deploy & nest build",
+		"build": "prisma generate & nest build",
+		"start": "node dist/src/main",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
 		"dev": "nest start --watch",
 		"debug": "nest start --debug --watch",
-		"start": "node dist/src/main",
 		"test": "run-p test:*",
 		"test:unit": "jest",
 		"test:e2e": "jest --config ./src/jest-e2e.json",

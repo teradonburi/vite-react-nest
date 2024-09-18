@@ -7,6 +7,7 @@
 		"build": "run-p build:*",
 		"build:frontend": "pnpm -F \"frontend\" build",
 		"build:backend": "pnpm -F \"backend\" build",
+		"start": "pnpm -F \"backend\" start",
 		"test": "pnpm -F \"backend\" test",
 		"husky": "pnpm -F \"backend\" start",
 		"prepare": "husky"

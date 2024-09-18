@@ -6,7 +6,7 @@
 	"private": true,
 	"license": "UNLICENSED",
 	"scripts": {
-		"build": "prisma generate & nest build",
+		"build": "prisma generate & prisma deploy & nest build",
 		"start": "node dist/src/main",
 		"openapi": "npx @rtk-query/codegen-openapi openapi-config.ts",
 		"format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

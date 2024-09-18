@@ -14,7 +14,7 @@ import { PrismaModule } from "../prisma/prisma.module";
 			isGlobal: true,
 		}),
 		ServeStaticModule.forRoot({
-			rootPath: join(__dirname, "../../../frontend/dist"),
+			rootPath: join(__dirname, "../../../../frontend/dist"),
 		}),
 		PrismaModule,
 		AuthModule,

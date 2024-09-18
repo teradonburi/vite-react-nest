@@ -1,1 +1,1 @@
-web: npm install -g corepack & corepack use pnpm@9 & NODE_ENV=production pnpm run build & pnpm run start
+web: npm install -g corepack & corepack use pnpm@9 & npx prisma migrate deploy & NODE_ENV=production pnpm run build & pnpm run start

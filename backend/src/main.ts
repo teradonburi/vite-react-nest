@@ -15,7 +15,8 @@ async function bootstrap() {
 		// CORS
 		app.enableCors({
 			origin: "*",
-			allowedHeaders: "Origin, X-Requested-With, Content-Type, Accept",
+			allowedHeaders:
+				"Authorization, Origin, X-Requested-With, Content-Type, Accept",
 		});
 		// remove unused request parameters
 		app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
@@ -28,6 +29,7 @@ async function bootstrap() {
 			.addTag("example")
 			.build();
 		const document = SwaggerModule.createDocument(app, config);
+		// Swagger UIにアクセスするためのエンドポイント
 		SwaggerModule.setup("api-docs", app, document);
 
 		// export to JSON

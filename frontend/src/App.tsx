@@ -3,6 +3,7 @@ import TopPage from "./pages/TopPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
+import UserPage from "./pages/UserPage";
 import Layout from "./templates/Layout";
 
 function App() {
@@ -29,6 +30,14 @@ function App() {
 				element={
 					<Layout>
 						<LoginPage />
+					</Layout>
+				}
+			/>
+			<Route
+				path="/user"
+				element={
+					<Layout>
+						<UserPage />
 					</Layout>
 				}
 			/>

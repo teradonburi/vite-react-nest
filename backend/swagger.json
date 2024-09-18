@@ -50,6 +50,8 @@
     "/api/auth/signup": {
       "post": {
         "operationId": "AuthController_signup",
+        "summary": "ユーザ登録",
+        "description": "ユーザを登録する。",
         "parameters": [],
         "requestBody": {
           "required": true,
@@ -62,8 +64,28 @@
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ApiCommonResponseOfUserResponseDto",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CommonResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/UserResponseDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }
@@ -71,20 +93,42 @@
     "/api/auth/login": {
       "post": {
         "operationId": "AuthController_login",
+        "summary": "ログイン",
+        "description": "ログインする。",
         "parameters": [],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/LoginDto"
+                "$ref": "#/components/schemas/LoginRequestDto"
               }
             }
           }
         },
         "responses": {
-          "201": {
-            "description": ""
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "title": "ApiCommonResponseOfLoginResponseDto",
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CommonResponseDto"
+                    },
+                    {
+                      "properties": {
+                        "data": {
+                          "type": "object",
+                          "$ref": "#/components/schemas/LoginResponseDto"
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
           }
         }
       }
@@ -279,6 +323,19 @@
           "message"
         ]
       },
+      "UserResponseDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "name",
+            "example": "nickname"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
       "CreateUserDto": {
         "type": "object",
         "properties": {
@@ -304,7 +361,26 @@
           "name"
         ]
       },
-      "LoginDto": {
+      "LoginResponseDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "user id",
+            "example": "1"
+          },
+          "access_token": {
+            "type": "string",
+            "description": "jwt token",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTcyNjY0NzQ5MywiZXhwIjoxNzI2NjQ4NjkzfQ.Ac7bLt8f6JoshNX_V0hbbJZj_3LfGcupY3ffFQRKpak"
+          }
+        },
+        "required": [
+          "id",
+          "access_token"
+        ]
+      },
+      "LoginRequestDto": {
         "type": "object",
         "properties": {
           "email": {
@@ -321,19 +397,6 @@
         "required": [
           "email",
           "password"
-        ]
-      },
-      "UserResponseDto": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "name",
-            "example": "nickname"
-          }
-        },
-        "required": [
-          "name"
         ]
       },
       "UpdateUserDto": {

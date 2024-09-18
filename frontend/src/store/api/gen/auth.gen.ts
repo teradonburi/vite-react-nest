@@ -18,20 +18,40 @@ const injectedRtkApi = api.injectEndpoints({
       query: (queryArg) => ({
         url: `/api/auth/login`,
         method: "POST",
-        body: queryArg.loginDto,
+        body: queryArg.loginRequestDto,
       }),
     }),
   }),
   overrideExisting: false,
 });
 export { injectedRtkApi as enhancedApi };
-export type AuthControllerSignupResponse = unknown;
+export type AuthControllerSignupResponse =
+  /** status 200  */ CommonResponseDto & {
+    data?: UserResponseDto;
+  };
 export type AuthControllerSignupArgs = {
   createUserDto: CreateUserDto;
 };
-export type AuthControllerLoginResponse = unknown;
+export type AuthControllerLoginResponse =
+  /** status 200  */ CommonResponseDto & {
+    data?: LoginResponseDto;
+  };
 export type AuthControllerLoginArgs = {
-  loginDto: LoginDto;
+  loginRequestDto: LoginRequestDto;
+};
+export type CommonResponseDto = {
+  /** 実行結果 */
+  success: boolean;
+  /** レスポンス送信日時 */
+  date: string;
+  /** データ */
+  data: object;
+  /** エラー内容 */
+  error: string;
+};
+export type UserResponseDto = {
+  /** name */
+  name: string;
 };
 export type CreateUserDto = {
   /** Email */
@@ -41,7 +61,13 @@ export type CreateUserDto = {
   /** name */
   name: string;
 };
-export type LoginDto = {
+export type LoginResponseDto = {
+  /** user id */
+  id: string;
+  /** jwt token */
+  access_token: string;
+};
+export type LoginRequestDto = {
   /** Email */
   email: string;
   /** password */

@@ -3,6 +3,9 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useAuthControllerLoginMutation } from "../store/api/gen/auth.gen";
+import { useNavigate } from "react-router-dom";
+import { login } from "../store/api/auth";
+import { useDispatch } from "react-redux";
 
 const loginFormSchema = z.object({
 	email: z.string().email({ message: "メールアドレスを入力してください" }),
@@ -21,14 +24,17 @@ const LoginPage: React.FC = () => {
 		resolver: zodResolver(loginFormSchema),
 	});
 	const [loginMutation] = useAuthControllerLoginMutation();
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
 
 	const onSubmit = (values: LoginFormSchemaType) => {
 		loginMutation({
-			loginDto: values,
+			loginRequestDto: values,
 		})
 			.unwrap()
-			.then((data) => {
-				console.log(data);
+			.then((response) => {
+				dispatch(login(response.data));
+				navigate("/user", { replace: true });
 			});
 	};
 
@@ -44,6 +50,7 @@ const LoginPage: React.FC = () => {
 				{...register("email")}
 				placeholder="メールアドレス"
 				required
+				style={{ alignSelf: "baseline", marginBottom: 8, width: 200 }}
 			/>
 			{errors.email && <div>{errors.email.message}</div>}
 			<input
@@ -52,9 +59,15 @@ const LoginPage: React.FC = () => {
 				{...register("password")}
 				placeholder="パスワード"
 				required
+				style={{ alignSelf: "baseline", marginBottom: 8, width: 200 }}
 			/>
 			{errors.password && <div>{errors.password.message}</div>}
-			<button type="submit">ログイン</button>
+			<button
+				type="submit"
+				style={{ alignSelf: "baseline", marginBottom: 8, width: 200 }}
+			>
+				ログイン
+			</button>
 		</form>
 	);
 };

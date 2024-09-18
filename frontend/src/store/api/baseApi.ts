@@ -4,6 +4,8 @@ import {
 	fetchBaseQuery,
 } from "@reduxjs/toolkit/query/react";
 import fetch from "isomorphic-fetch";
+import { RootState } from "../index";
+import { logout } from "./auth";
 
 export const baseApi = createApi({
 	baseQuery: fetchBaseQuery({
@@ -12,8 +14,8 @@ export const baseApi = createApi({
 				? window.location.origin
 				: "http://localhost:3000",
 		prepareHeaders: (headers, { getState }) => {
-			const state = getState() as { access_token: string };
-			const access_token: string = state?.access_token;
+			const state = getState() as RootState;
+			const access_token: string = state?.auth.access_token;
 
 			if (access_token) {
 				headers.set("Authorization", `Bearer ${access_token}`);
@@ -23,6 +25,10 @@ export const baseApi = createApi({
 		},
 		validateStatus(response) {
 			if (response.status >= 200 && response.status <= 299) return true;
+			if (response.status === 401) {
+				logout();
+				return false;
+			}
 			return false;
 		},
 		fetchFn: fetch,

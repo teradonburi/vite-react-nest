@@ -23,8 +23,15 @@ const Layout: React.FC<LayoutProps> = (props) => {
 				</ol>
 			</header>
 			<main>{children}</main>
-			<footer style={{ borderTop: "thin solid black", marginTop: 10 }}>
-				フッター
+			<footer
+				style={{
+					borderTop: "thin solid black",
+					marginTop: 10,
+					paddingTop: 10,
+					textAlign: "right",
+				}}
+			>
+				2024 Example
 			</footer>
 		</div>
 	);

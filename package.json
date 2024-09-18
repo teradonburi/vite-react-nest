@@ -9,7 +9,6 @@
 		"build:backend": "pnpm -F \"backend\" build",
 		"start": "pnpm -F \"backend\" start",
 		"test": "pnpm -F \"backend\" test",
-		"husky": "pnpm -F \"backend\" start",
 		"prepare": "husky"
 	},
 	"devDependencies": {

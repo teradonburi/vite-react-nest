@@ -5,7 +5,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import fetch from "isomorphic-fetch";
 import { RootState } from "../index";
-import { logout } from "./auth";
+import { LOGOUT_EVENT } from "./auth";
 
 export const baseApi = createApi({
 	baseQuery: fetchBaseQuery({
@@ -26,7 +26,7 @@ export const baseApi = createApi({
 		validateStatus(response) {
 			if (response.status >= 200 && response.status <= 299) return true;
 			if (response.status === 401) {
-				logout();
+				window.dispatchEvent(new CustomEvent(LOGOUT_EVENT));
 				return false;
 			}
 			return false;

@@ -8,9 +8,14 @@ const UserPage: React.FC = () => {
 	const { isLoading, data: response } = usersApi.useUsersControllerFindOneQuery(
 		{ id },
 	);
+
 	return (
 		<div>
-			{isLoading ? <div>loading...</div> : <div>{response?.data?.name}</div>}
+			{isLoading ? (
+				<div>loading...</div>
+			) : (
+				<div>ようこそ{response?.data?.name}さん</div>
+			)}
 		</div>
 	);
 };

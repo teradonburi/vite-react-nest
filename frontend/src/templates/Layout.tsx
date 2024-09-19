@@ -1,5 +1,8 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { RootState } from "../store";
+import { logout } from "../store/api/auth";
 
 interface LayoutProps {
 	children: React.ReactNode;
@@ -7,6 +10,9 @@ interface LayoutProps {
 
 const Layout: React.FC<LayoutProps> = (props) => {
 	const { children } = props;
+	const isLogggedIn = useSelector((state: RootState) => !!state.auth.id);
+	const dispatch = useDispatch();
+
 	return (
 		<div>
 			<header style={{ borderBottom: "thin solid black", paddingBottom: 10 }}>
@@ -14,12 +20,27 @@ const Layout: React.FC<LayoutProps> = (props) => {
 					<li style={{ marginRight: 8 }}>
 						<Link to="/">トップ</Link>
 					</li>
-					<li style={{ marginRight: 8 }}>
-						<Link to="/signup">ユーザ登録</Link>
-					</li>
-					<li style={{ marginRight: 8 }}>
-						<Link to="/login">ログイン</Link>
-					</li>
+					{isLogggedIn ? (
+						<>
+							<li style={{ marginRight: 8 }}>
+								<Link to="/user">ユーザ</Link>
+							</li>
+							<li style={{ marginRight: 8 }}>
+								<Link onClick={() => dispatch(logout())} to="">
+									ログアウト
+								</Link>
+							</li>
+						</>
+					) : (
+						<>
+							<li style={{ marginRight: 8 }}>
+								<Link to="/signup">ユーザ登録</Link>
+							</li>
+							<li style={{ marginRight: 8 }}>
+								<Link to="/login">ログイン</Link>
+							</li>
+						</>
+					)}
 				</ol>
 			</header>
 			<main>{children}</main>

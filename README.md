@@ -1,5 +1,5 @@
-# Fullstack example of deploy to Heroku
-フルスタックサンプル
+# 最小フルスタックサンプル
+簡易のためデプロイ先はHeroku
 
 - TypeScript
 - pnpm+husky
@@ -7,7 +7,6 @@
 - React+Redux Toolkits+React Router
 - NestJS+Open API(Swagger)
 - prisma+PostgresSQL
-- Heroku
 
 # セットアップ
 環境変数を`backend/.env`に追加します。

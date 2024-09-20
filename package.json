@@ -1,6 +1,7 @@
 {
 	"private": true,
 	"scripts": {
+		"init-db": "pnpm -F \"backend\" prisma:migrate",
 		"dev": "run-p dev:*",
 		"dev:frontend": "pnpm -F \"frontend\" dev",
 		"dev:backend": "pnpm -F \"backend\" dev",

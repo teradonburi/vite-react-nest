@@ -52,7 +52,7 @@ $ docker compose up -d
 $ pnpm install
 
 # prisma初期化
-$ pnpm run init-db
+$ pnpm run init-app
 
 # 起動
 $ pnpm run dev
